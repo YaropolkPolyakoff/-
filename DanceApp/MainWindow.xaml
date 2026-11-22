@@ -1,0 +1,197 @@
+<Window x:Class="DanceApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="clr-namespace:DanceApp.Views"
+        Title="DanceFlow — Студия современного танца"
+        Width="1200" Height="750"
+        MinWidth="900" MinHeight="600"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource BackgroundDarkBrush}"
+        WindowStyle="None"
+        AllowsTransparency="True">
+
+    <Window.Resources>
+        <!-- Storyboard: fade page in -->
+        <Storyboard x:Key="PageFadeIn">
+            <DoubleAnimation Storyboard.TargetName="ContentArea"
+                             Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:0.25"/>
+        </Storyboard>
+    </Window.Resources>
+
+    <!-- Drop shadow on the window border -->
+    <Window.Effect>
+        <DropShadowEffect BlurRadius="30" ShadowDepth="0" Color="#AA000000"/>
+    </Window.Effect>
+
+    <Border CornerRadius="14" ClipToBounds="True">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- ═══════════════ LEFT NAV ═══════════════ -->
+            <Border Grid.Column="0"
+                    Background="{StaticResource NavBackgroundBrush}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Logo / brand -->
+                    <StackPanel Grid.Row="0" Margin="20,24,20,20">
+                        <Canvas Width="36" Height="36" HorizontalAlignment="Left">
+                            <Ellipse Canvas.Left="0" Canvas.Top="0"
+                                     Width="36" Height="36"
+                                     Fill="{StaticResource AccentGradientBrush}"/>
+                            <!-- Music note (vector logo) -->
+                            <Path Canvas.Left="10" Canvas.Top="7"
+                                  Fill="White"
+                                  Data="M5,0 L5,11 C4,10 2,10 1,11 C-1,13 0,16 2,16 C4,16 5,15 5,13 L5,4 L10,2 L10,8 C9,7 7,7 6,8 C4,10 5,13 7,13 C9,13 10,12 10,10 L10,0 Z"/>
+                        </Canvas>
+                        <TextBlock Text="DanceFlow"
+                                   Foreground="White"
+                                   FontSize="20"
+                                   FontWeight="Bold"
+                                   Margin="0,8,0,2"/>
+                        <TextBlock Text="Студия танца"
+                                   Foreground="{StaticResource TextSecondaryBrush}"
+                                   FontSize="11"/>
+                    </StackPanel>
+
+                    <!-- Divider -->
+                    <Rectangle Grid.Row="0" Height="1"
+                               VerticalAlignment="Bottom"
+                               Fill="{StaticResource DividerBrush}"
+                               Margin="16,0"/>
+
+                    <!-- Nav items -->
+                    <StackPanel Grid.Row="1" Margin="0,12,0,0">
+
+                        <!-- Catalog -->
+                        <RadioButton x:Name="NavCatalog"
+                                     GroupName="Nav"
+                                     IsChecked="True"
+                                     Style="{StaticResource NavButtonStyle}"
+                                     Click="NavCatalog_Click">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <!-- 2×2 grid icon (vector) -->
+                                <Canvas Width="18" Height="18">
+                                    <Rectangle Canvas.Left="0" Canvas.Top="0"  Width="7" Height="7"
+                                               Fill="{StaticResource TextSecondaryBrush}" RadiusX="1.5" RadiusY="1.5"/>
+                                    <Rectangle Canvas.Left="11" Canvas.Top="0" Width="7" Height="7"
+                                               Fill="{StaticResource TextSecondaryBrush}" RadiusX="1.5" RadiusY="1.5"/>
+                                    <Rectangle Canvas.Left="0" Canvas.Top="11" Width="7" Height="7"
+                                               Fill="{StaticResource TextSecondaryBrush}" RadiusX="1.5" RadiusY="1.5"/>
+                                    <Rectangle Canvas.Left="11" Canvas.Top="11" Width="7" Height="7"
+                                               Fill="{StaticResource TextSecondaryBrush}" RadiusX="1.5" RadiusY="1.5"/>
+                                </Canvas>
+                                <TextBlock Text="Каталог стилей"
+                                           Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"
+                                           Margin="10,0,0,0"
+                                           VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </RadioButton>
+
+                        <!-- Video Player -->
+                        <RadioButton x:Name="NavPlayer"
+                                     GroupName="Nav"
+                                     Style="{StaticResource NavButtonStyle}"
+                                     Click="NavPlayer_Click">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <!-- Play triangle (vector) -->
+                                <Canvas Width="18" Height="18">
+                                    <Polygon Points="2,1 16,9 2,17"
+                                             Fill="{StaticResource TextSecondaryBrush}"/>
+                                </Canvas>
+                                <TextBlock Text="Видеоплеер"
+                                           Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"
+                                           Margin="10,0,0,0"
+                                           VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </RadioButton>
+
+                        <!-- 3D Demo -->
+                        <RadioButton x:Name="NavDemo3D"
+                                     GroupName="Nav"
+                                     Style="{StaticResource NavButtonStyle}"
+                                     Click="NavDemo3D_Click">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <!-- Hexagon / cube icon (vector) -->
+                                <Canvas Width="18" Height="18">
+                                    <Polygon Points="9,1 17,5 17,13 9,17 1,13 1,5"
+                                             Fill="Transparent"
+                                             Stroke="{StaticResource TextSecondaryBrush}"
+                                             StrokeThickness="1.5"/>
+                                    <Line X1="9" Y1="1"  X2="9"  Y2="17"
+                                          Stroke="{StaticResource TextSecondaryBrush}" StrokeThickness="1"/>
+                                    <Line X1="1" Y1="5"  X2="17" Y2="5"
+                                          Stroke="{StaticResource TextSecondaryBrush}" StrokeThickness="1"/>
+                                </Canvas>
+                                <TextBlock Text="3D Демонстрация"
+                                           Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"
+                                           Margin="10,0,0,0"
+                                           VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </RadioButton>
+
+                    </StackPanel>
+
+                    <!-- Bottom: version info -->
+                    <StackPanel Grid.Row="2" Margin="16,0,16,16">
+                        <Rectangle Height="1" Fill="{StaticResource DividerBrush}" Margin="0,0,0,10"/>
+                        <TextBlock Text="v1.0.0  •  WPF / .NET 8"
+                                   Foreground="{StaticResource TextSecondaryBrush}"
+                                   FontSize="10"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- ═══════════════ MAIN CONTENT ═══════════════ -->
+            <Grid Grid.Column="1">
+                <!-- Custom title bar (draggable area) -->
+                <Border x:Name="TitleBar"
+                        Height="40"
+                        VerticalAlignment="Top"
+                        Background="{StaticResource BackgroundDarkBrush}"
+                        MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
+                        Cursor="SizeAll"
+                        Panel.ZIndex="10">
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Margin="0,0,12,0">
+                        <!-- Minimize (vector dash) -->
+                        <Button Width="30" Height="24"
+                                Style="{StaticResource BaseButtonStyle}"
+                                Foreground="{StaticResource TextSecondaryBrush}"
+                                Click="MinimizeButton_Click">
+                            <Path Data="M4,10 L18,10" Stroke="{StaticResource TextSecondaryBrush}"
+                                  StrokeThickness="2" Width="22" Height="20" Stretch="None"/>
+                        </Button>
+                        <!-- Close (vector X) -->
+                        <Button Width="30" Height="24"
+                                Style="{StaticResource BaseButtonStyle}"
+                                Foreground="{StaticResource TextSecondaryBrush}"
+                                Click="CloseButton_Click">
+                            <Path Data="M4,4 L18,18 M18,4 L4,18"
+                                  Stroke="{StaticResource TextSecondaryBrush}"
+                                  StrokeThickness="2" StrokeLineCap="Round"
+                                  Width="22" Height="22" Stretch="None"/>
+                        </Button>
+                    </StackPanel>
+                </Border>
+
+                <!-- Page content area -->
+                <Border x:Name="ContentArea" Margin="0,40,0,0">
+                    <ContentControl x:Name="PageHost"/>
+                </Border>
+            </Grid>
+
+        </Grid>
+    </Border>
+</Window>
