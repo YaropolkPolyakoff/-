@@ -4,10 +4,10 @@
              xmlns:conv="clr-namespace:DanceApp.Converters"
              Background="{StaticResource BackgroundDarkBrush}">
 
-    <UserControl.Resources>
-        <conv:TimeSpanToStringConverter  x:Key="TsToStr"/>
-        <conv:ActiveStepToBrushConverter x:Key="ActiveStepBrush"/>
-        <conv:BoolToVisibilityConverter  x:Key="BoolToVis"/>
+   <UserControl.Resources>
+       <conv:TimeSpanToStringConverter  x:Key="TsToStr"/>
+       <conv:ActiveStepToBrushConverter x:Key="ActiveStepBrush"/>
+       <conv:BoolToVisibilityConverter  x:Key="BoolToVis"/>
 
         <!-- Step list item template -->
         <DataTemplate x:Key="StepTemplate">
@@ -219,8 +219,7 @@
                     <!-- Left: Speed buttons -->
                     <StackPanel Grid.Column="0"
                                 Orientation="Horizontal"
-                                VerticalAlignment="Center"
-                                Spacing="6">
+                                VerticalAlignment="Center">
                         <TextBlock Text="Скорость:"
                                    Foreground="{StaticResource TextSecondaryBrush}"
                                    FontSize="11"
@@ -230,12 +229,14 @@
                                      Content="0.5×"
                                      Style="{StaticResource ToggleButtonStyle}"
                                      GroupName="Speed"
-                                     Checked="SpeedButton_Checked" Tag="0.5"/>
+                                     Checked="SpeedButton_Checked" Tag="0.5"
+                                     Margin="0,0,6,0"/>
                         <RadioButton x:Name="Speed075Btn"
                                      Content="0.75×"
                                      Style="{StaticResource ToggleButtonStyle}"
                                      GroupName="Speed"
-                                     Checked="SpeedButton_Checked" Tag="0.75"/>
+                                     Checked="SpeedButton_Checked" Tag="0.75"
+                                     Margin="0,0,6,0"/>
                         <RadioButton x:Name="Speed1Btn"
                                      Content="1×"
                                      Style="{StaticResource ToggleButtonStyle}"
@@ -247,12 +248,12 @@
                     <!-- Center: Playback controls -->
                     <StackPanel Grid.Column="1"
                                 Orientation="Horizontal"
-                                VerticalAlignment="Center"
-                                Spacing="8">
+                                VerticalAlignment="Center">
                         <!-- Skip back 10s (vector) -->
                         <Button Style="{StaticResource PlayerIconButtonStyle}"
                                 Click="SkipBack_Click"
-                                ToolTip="-10 сек">
+                                ToolTip="-10 сек"
+                                Margin="0,0,8,0">
                             <Canvas Width="20" Height="20">
                                 <Path Stroke="White" StrokeThickness="2"
                                       Data="M15,2 A8,8 0 1 0 15,18"
@@ -267,7 +268,8 @@
                         <Button x:Name="PlayPauseBtn"
                                 Style="{StaticResource PlayerIconButtonStyle}"
                                 Width="52" Height="52"
-                                Click="PlayPause_Click">
+                                Click="PlayPause_Click"
+                                Margin="0,0,8,0">
                             <Canvas Width="22" Height="22" x:Name="PlayPauseIcon">
                                 <!-- Play icon -->
                                 <Polygon x:Name="PlayIcon"
@@ -304,14 +306,14 @@
                     <StackPanel Grid.Column="2"
                                 Orientation="Horizontal"
                                 HorizontalAlignment="Right"
-                                VerticalAlignment="Center"
-                                Spacing="6">
+                                VerticalAlignment="Center">
                         <!-- Mirror toggle -->
                         <ToggleButton x:Name="MirrorToggle"
                                       Style="{StaticResource ToggleButtonStyle}"
                                       Checked="MirrorToggle_Checked"
                                       Unchecked="MirrorToggle_Unchecked"
-                                      ToolTip="Зеркальное отражение">
+                                      ToolTip="Зеркальное отражение"
+                                      Margin="0,0,6,0">
                             <StackPanel Orientation="Horizontal">
                                 <Path Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}}"
                                       Data="M0,8 L6,0 L6,4 L10,4 L10,12 L6,12 L6,16 Z M14,8 L20,0 L20,4 L16,4 L16,12 L20,12 L20,16 Z"
